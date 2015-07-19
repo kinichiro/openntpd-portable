@@ -33,6 +33,9 @@ if !HAVE_ADJFREQ
 if HOST_FREEBSD
 libcompat_la_SOURCES += adjfreq_freebsd.c
 endif
+if HOST_HPUX
+libcompat_la_SOURCES += adjfreq_hpux.c
+endif
 if HOST_LINUX
 libcompat_la_SOURCES += adjfreq_linux.c
 endif
@@ -113,6 +116,9 @@ if !HAVE_GETENTROPY
 if HOST_FREEBSD
 libcompat_la_SOURCES += getentropy_freebsd.c
 endif
+if HOST_HPUX
+libcompat_la_SOURCES += getentropy_hpux.c
+endif
 if HOST_LINUX
 libcompat_la_SOURCES += getentropy_linux.c
 libcompat_la_SOURCES += sha2.c
@@ -132,12 +138,18 @@ endif
 endif
 
 if !HAVE_IFADDRS_H
+if HOST_HPUX
+libcompat_la_SOURCES += getifaddrs_hpux.c
+endif
 if HOST_SOLARIS
 libcompat_la_SOURCES += getifaddrs_solaris.c
 endif
 endif
 
 if !HAVE_DAEMON
+if HOST_HPUX
+libcompat_la_SOURCES += daemon_hpux.c
+endif
 if HOST_SOLARIS
 libcompat_la_SOURCES += daemon_solaris.c
 endif
@@ -149,6 +161,7 @@ endif
 
 noinst_HEADERS = arc4random.h
 noinst_HEADERS += arc4random_freebsd.h
+noinst_HEADERS += arc4random_hpux.h
 noinst_HEADERS += arc4random_linux.h
 noinst_HEADERS += arc4random_netbsd.h
 noinst_HEADERS += arc4random_osx.h

@@ -46,6 +46,16 @@ case $host_os in
 		HOST_OS=freebsd
 		AC_SUBST([PROG_LDADD], ['-lthr'])
 		;;
+	*hpux*)
+		HOST_OS=hpux
+		if test "`echo $CC | cut -d ' ' -f 1`" = "gcc" ; then
+			CFLAGS="$CFLAGS -mlp64"
+		else
+			CFLAGS="-g -O2 +DD64"
+		fi
+		CFLAGS="$CFLAGS -D_XOPEN_SOURCE=600 -D__STRICT_ALIGNMENT"
+		AC_SUBST([PLATFORM_LDADD], ['-lpthread'])
+		;;
 	*linux*)
 		HOST_OS=linux
 		CFLAGS="$CFLAGS -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_GNU_SOURCE"
@@ -69,6 +79,7 @@ esac
 
 AM_CONDITIONAL([HOST_DARWIN],  [test x$HOST_OS = xdarwin])
 AM_CONDITIONAL([HOST_FREEBSD], [test x$HOST_OS = xfreebsd])
+AM_CONDITIONAL([HOST_HPUX], [test x$HOST_OS = xhpux])
 AM_CONDITIONAL([HOST_LINUX],   [test x$HOST_OS = xlinux])
 AM_CONDITIONAL([HOST_NETBSD],  [test x$HOST_OS = xnetbsd])
 AM_CONDITIONAL([HOST_OPENBSD],  [test x$HOST_OS = xopenbsd])
