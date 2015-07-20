@@ -53,8 +53,7 @@ case $host_os in
 		else
 			CFLAGS="-g -O2 +DD64"
 		fi
-		CFLAGS="$CFLAGS -D_XOPEN_SOURCE=600 -D__STRICT_ALIGNMENT"
-		AC_SUBST([PLATFORM_LDADD], ['-lpthread'])
+		CFLAGS="$CFLAGS -D_XOPEN_SOURCE=600"
 		;;
 	*linux*)
 		HOST_OS=linux
