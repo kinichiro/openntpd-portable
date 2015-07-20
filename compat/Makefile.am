@@ -118,6 +118,7 @@ libcompat_la_SOURCES += getentropy_freebsd.c
 endif
 if HOST_HPUX
 libcompat_la_SOURCES += getentropy_hpux.c
+libcompat_la_SOURCES += sha2.c
 endif
 if HOST_LINUX
 libcompat_la_SOURCES += getentropy_linux.c
